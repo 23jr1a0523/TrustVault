@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustVault - Audit Logs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f5fb;
+            color: #1e293b;
+        }
+
+        header {
+            background: white;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        header a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .action {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .empty {
+            padding: 30px;
+            text-align: center;
+            color: #64748b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .heading h1 {
+                font-size: 25px;
+            }
+
+            .panel {
+                padding: 12px;
+            }
+
+            th, td {
+                padding: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">TrustVault</div>
+        <a href="/dashboard">Back to Dashboard</a>
+    </header>
+
+    <main>
+        <section class="heading">
+            <h1>Audit Logs</h1>
+            <p>Monitor document upload activities and maintain accountability.</p>
+        </section>
+
+        <section class="panel">
+            {% if logs %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Document</th>
+                            <th>Date and Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for log in logs %}
+                            <tr>
+                                <td>{{ log["username"] or "Unknown" }}</td>
+                                <td>
+                                    <span class="action">
+                                        {{ log["action"] }}
+                                    </span>
+                                </td>
+                                <td>{{ log["document_name"] or "-" }}</td>
+                                <td>{{ log["created_at"] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="empty">
+                    <h3>No audit logs available</h3>
+                    <p>Document activities will appear here.</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        TrustVault · Secure Document Sharing · Development Preview
+    </footer>
+</body>
+</html>

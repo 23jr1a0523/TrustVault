@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustVault | Secure Document Sharing</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050918;
+            color: #f8faff;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 7%;
+            border-bottom: 1px solid #1b2542;
+            background: #080e20;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #9575ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            color: #c5cce0;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: #a995ff;
+        }
+
+        .nav-button {
+            border: 1px solid #806bff;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .hero {
+            max-width: 1250px;
+            margin: auto;
+            padding: 75px 35px 45px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 10px 15px;
+            color: #c8baff;
+            border: 1px solid #48358c;
+            background: #151333;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 5vw, 67px);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -2.8px;
+            margin-bottom: 24px;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #6ba9ff, #ba58ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .description {
+            max-width: 570px;
+            color: #aeb9d4;
+            font-size: 17px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .primary, .secondary {
+            display: inline-block;
+            padding: 16px 25px;
+            border-radius: 13px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .primary {
+            background: linear-gradient(110deg, #873dff, #397eff);
+            color: white;
+            box-shadow: 0 8px 30px #5540ff30;
+        }
+
+        .primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px #5540ff55;
+        }
+
+        .secondary {
+            border: 1px solid #6378bb;
+            color: white;
+        }
+
+        .secondary:hover {
+            background: #151d37;
+        }
+
+        .vault {
+            min-height: 365px;
+            border-radius: 28px;
+            border: 1px solid #303d70;
+            background:
+                radial-gradient(ellipse at 50% 45%, #263b89 0%, transparent 48%),
+                linear-gradient(145deg, #111a37, #090e20);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 90px #00000045;
+        }
+
+        .vault::before {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border: 1px solid #536bff55;
+            border-radius: 50%;
+            box-shadow: 0 0 55px #5b52ff22;
+        }
+
+        .shield {
+            z-index: 1;
+            width: 135px;
+            height: 135px;
+            display: grid;
+            place-items: center;
+            border-radius: 35px;
+            font-size: 65px;
+            background: linear-gradient(145deg, #5445e9, #1c83ff);
+            box-shadow: 0 0 65px #5e55ff60;
+            margin-bottom: 30px;
+        }
+
+        .vault h2 {
+            z-index: 1;
+            font-size: 24px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .vault p {
+            z-index: 1;
+            color: #b0bee2;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .features {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 10px 35px 45px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #0e1730, #0a1022);
+            border: 1px solid #243354;
+            border-radius: 18px;
+            padding: 25px 22px;
+            transition: 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: #7867e9;
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            background: #28235b;
+            color: #c1b5ff;
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #aab6d0;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .bottom {
+            text-align: center;
+            color: #8997b8;
+            font-size: 13px;
+            padding: 25px;
+            border-top: 1px solid #1b2542;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding-top: 50px;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            nav {
+                padding: 20px;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            .nav-button {
+                padding: 10px 13px;
+            }
+
+            .hero {
+                padding: 45px 22px;
+            }
+
+            h1 {
+                font-size: 43px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                padding: 0 22px 35px;
+            }
+
+            .vault {
+                min-height: 310px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Trust<span>Vault</span></div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#security">Security</a>
+        </div>
+
+        <a class="nav-button" href="#features">Explore</a>
+    </nav>
+
+    <main id="home">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">✦ &nbsp; SECURE DOCUMENT SHARING</div>
+
+                <h1>
+                    Your Documents.<br>
+                    Your Control.<br>
+                    <span>Our Commitment.</span>
+                </h1>
+
+                <p class="description">
+                    Manage and share sensitive documents with confidence.
+                    TrustVault brings access control, document integrity,
+                    and transparent activity tracking into one secure platform.
+                </p>
+
+                <div class="actions">
+                    <a class="primary" href="#features">Explore Features &nbsp; →</a>
+                    <a class="secondary" href="#security">Discover Security</a>
+                </div>
+            </div>
+
+            <div class="vault" id="security">
+                <div class="shield">♢</div>
+                <h2>Security at Every Step</h2>
+                <p>
+                    Controlled access. Document integrity.<br>
+                    Transparent activity tracking.
+                </p>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <article class="feature-card">
+                <div class="feature-icon">♢</div>
+                <h3>Secure Sharing</h3>
+                <p>Share documents with controlled permissions and authorized users.</p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon">♙</div>
+                <h3>Role-Based Access</h3>
+                <p>Separate user and administrator permissions for better control.</p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon">▤</div>
+                <h3>Integrity Check</h3>
+                <p>Use SHA-256 hashes to verify whether documents have changed.</p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon">◷</div>
+                <h3>Audit Logs</h3>
+                <p>Record important actions for accountable document management.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="bottom">
+        TrustVault © 2026 · Secure Document Sharing Platform
+    </footer>
+</body>
+</html>

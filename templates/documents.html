@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents | TrustVault</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #202943;
+            margin: 0;
+        }
+        nav {
+            background: white;
+            padding: 18px 7%;
+            border-bottom: 1px solid #e4e8f0;
+        }
+        nav a {
+            color: #6254d9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        main {
+            max-width: 760px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .card {
+            background: white;
+            padding: 28px;
+            border: 1px solid #e4e8f0;
+            border-radius: 14px;
+        }
+        .upload-box {
+            border: 2px dashed #b8b4ee;
+            background: #f8f7ff;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 22px;
+        }
+        input { margin: 18px 0; max-width: 100%; }
+        button {
+            background: #6254d9;
+            color: white;
+            border: 0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .muted { color: #68738a; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/dashboard">← Back to Dashboard</a>
+    </nav>
+
+    <main>
+        <div class="card">
+            <h1>My Documents</h1>
+            <p class="muted">
+                Upload a document to your TrustVault workspace.
+                Only upload files you are authorized to store.
+            </p>
+
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+
+            <form method="POST" action="/documents/upload"
+                  enctype="multipart/form-data">
+                <div class="upload-box">
+                    <h3>Select a document</h3>
+                    <p class="muted">Choose a file from your computer</p>
+                    <input type="file" name="document" required>
+                    <br>
+                    <button type="submit">Upload Document</button>
+                </div>
+            </form>
+            
+{% if message %}
+    <p style="color: red;">{{ message }}</p>
+{% endif %}
+
+{% if files %}
+    <h2>Your uploaded documents</h2>
+
+    {% for file in files %}
+        <div style="padding: 12px 0; border-bottom: 1px solid #e4e8f0;">
+            <strong>{{ file["original_name"] }}</strong>
+            <p>SHA-256: {{ file["sha256_hash"] }}</p>
+            <a href="/documents/download/{{ file['id'] }}">Download</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No documents uploaded yet.</p>
+{% endif %}
+
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Control | TrustVault</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #202943;
+        }
+        nav {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #e4e8f0;
+        }
+        nav a { color: #6254d9; text-decoration: none; font-weight: bold; }
+        main { max-width: 850px; margin: 40px auto; padding: 20px; }
+        .panel {
+            background: white;
+            padding: 28px;
+            margin: 18px 0;
+            border: 1px solid #e4e8f0;
+            border-radius: 12px;
+        }
+        h1 { color: #6254d9; }
+        p { line-height: 1.7; color: #68738a; }
+        .tag {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #eeecff;
+            color: #6254d9;
+            font-size: 13px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <strong>TrustVault</strong>
+        <a href="{{ url_for('dashboard') }}">← Dashboard</a>
+    </nav>
+
+    <main>
+        <h1>Access Control</h1>
+        <p>TrustVault restricts document access to protect confidential files.</p>
+
+        <section class="panel">
+            <span class="tag">USER ROLE</span>
+            <h2>Document Owner</h2>
+            <p>Users can view and download only documents associated with their account. The server checks ownership before allowing a download.</p>
+        </section>
+
+        <section class="panel">
+            <span class="tag">ADMIN ROLE</span>
+            <h2>Administrator</h2>
+            <p>Administrators can view the audit logs page. Ordinary users are denied access to that page.</p>
+        </section>
+
+        <section class="panel">
+            <span class="tag">SECURITY</span>
+            <h2>Server-side authorization</h2>
+            <p>Access checks happen on the server, rather than relying only on hiding links in the website.</p>
+        </section>
+
+        <a href="{{ url_for('documents') }}">Go to My Documents →</a>
+    </main>
+</body>
+</html>

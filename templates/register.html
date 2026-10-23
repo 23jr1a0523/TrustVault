@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | TrustVault</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            width: 320px;
+            padding: 30px;
+            background: #171f35;
+            border-radius: 16px;
+        }
+        h1 { text-align: center; }
+        p { color: #b8c2d9; text-align: center; }
+        label { display: block; margin-top: 16px; }
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border-radius: 8px;
+            border: 1px solid #394663;
+            background: #0b1020;
+            color: white;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 22px;
+            border: 0;
+            border-radius: 8px;
+            background: #7765f8;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        a { color: #a99cff; }
+        .message { color: #ffb4b4; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Create Account</h1>
+        <p>Join TrustVault securely</p>
+
+        {% if error %}
+            <p class="message">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" action="/register">
+            <label for="username">Username</label>
+            <input id="username" name="username"
+                   required minlength="3" maxlength="50">
+
+            <label for="password">Password</label>
+            <input id="password" name="password"
+                   type="password" required minlength="8">
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        <p>Already registered? <a href="/login">Log in</a></p>
+        <p><a href="/">Back to Home</a></p>
+    </div>
+</body>
+</html>
