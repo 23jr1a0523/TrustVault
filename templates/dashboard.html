@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +7,7 @@
     <title>TrustVault | Dashboard</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         :root {
             --navy: #17213f;
@@ -25,16 +24,9 @@
             color: var(--text);
         }
 
-        a {
-            text-decoration: none;
-        }
+        a { text-decoration: none; }
 
-        .layout {
-            min-height: 100vh;
-            display: flex;
-        }
-
-        /* Sidebar */
+        .layout { min-height: 100vh; display: flex; }
 
         .sidebar {
             width: 245px;
@@ -51,9 +43,7 @@
             padding: 0 12px 38px;
         }
 
-        .brand span {
-            color: #a99cff;
-        }
+        .brand span { color: #a99cff; }
 
         .nav-link {
             display: flex;
@@ -85,16 +75,9 @@
             padding-top: 22px;
         }
 
-        .logout a {
-            color: #ffb7c1;
-        }
+        .logout a { color: #ffb7c1; }
 
-        /* Main content */
-
-        .main {
-            min-width: 0;
-            flex: 1;
-        }
+        .main { min-width: 0; flex: 1; }
 
         .topbar {
             min-height: 76px;
@@ -106,9 +89,7 @@
             padding: 18px 32px;
         }
 
-        .topbar small {
-            color: var(--muted);
-        }
+        .topbar small { color: var(--muted); }
 
         .profile {
             display: flex;
@@ -143,8 +124,6 @@
             margin: auto;
         }
 
-        /* Welcome section */
-
         .hero {
             display: flex;
             align-items: center;
@@ -174,9 +153,7 @@
             letter-spacing: -1.5px;
         }
 
-        .hero h1 span {
-            color: #5e4ef5;
-        }
+        .hero h1 span { color: #5e4ef5; }
 
         .hero p {
             color: #5f6c8c;
@@ -191,8 +168,6 @@
             padding: 10px;
             filter: drop-shadow(0 12px 15px #a9a6f5);
         }
-
-        /* Status items */
 
         .status-grid {
             display: grid;
@@ -235,11 +210,7 @@
             line-height: 1.5;
         }
 
-        /* Quick Actions */
-
-        .section-heading {
-            margin: 32px 0 17px;
-        }
+        .section-heading { margin: 32px 0 17px; }
 
         .section-heading h2 {
             font-size: 24px;
@@ -275,21 +246,10 @@
             box-shadow: 0 13px 28px rgba(34, 47, 95, .10);
         }
 
-        .card.blue {
-            background: linear-gradient(145deg, #fff, #edf4ff);
-        }
-
-        .card.green {
-            background: linear-gradient(145deg, #fff, #edfff5);
-        }
-
-        .card.orange {
-            background: linear-gradient(145deg, #fff, #fff5e9);
-        }
-
-        .card.purple {
-            background: linear-gradient(145deg, #fff, #f4efff);
-        }
+        .card.blue { background: linear-gradient(145deg, #fff, #edf4ff); }
+        .card.green { background: linear-gradient(145deg, #fff, #edfff5); }
+        .card.orange { background: linear-gradient(145deg, #fff, #fff5e9); }
+        .card.purple { background: linear-gradient(145deg, #fff, #f4efff); }
 
         .card-icon {
             display: grid;
@@ -302,17 +262,9 @@
             margin-bottom: 17px;
         }
 
-        .green .card-icon {
-            background: #d6f9e4;
-        }
-
-        .orange .card-icon {
-            background: #ffebc8;
-        }
-
-        .purple .card-icon {
-            background: #e8ddff;
-        }
+        .green .card-icon { background: #d6f9e4; }
+        .orange .card-icon { background: #ffebc8; }
+        .purple .card-icon { background: #e8ddff; }
 
         .card h3 {
             font-size: 17px;
@@ -333,8 +285,6 @@
             font-size: 15px;
         }
 
-        /* Information notice */
-
         .notice {
             margin-top: 23px;
             padding: 20px 23px;
@@ -347,9 +297,7 @@
             align-items: flex-start;
         }
 
-        .notice-icon {
-            font-size: 25px;
-        }
+        .notice-icon { font-size: 25px; }
 
         .notice h3 {
             margin: 0 0 8px;
@@ -363,8 +311,6 @@
             margin: 0;
         }
 
-        /* Footer */
-
         footer {
             display: flex;
             justify-content: space-between;
@@ -377,36 +323,17 @@
             font-size: 12px;
         }
 
-        footer strong {
-            color: var(--text);
-            font-size: 17px;
-        }
-
-        footer strong span {
-            color: #6555ef;
-        }
-
-        /* Responsive layout */
+        footer strong { color: var(--text); font-size: 17px; }
+        footer strong span { color: #6555ef; }
 
         @media (max-width: 1100px) {
-            .hero-art {
-                font-size: 75px;
-            }
+            .hero-art { font-size: 75px; }
         }
 
         @media (max-width: 700px) {
-            .layout {
-                display: block;
-            }
-
-            .sidebar {
-                width: 100%;
-                padding: 17px;
-            }
-
-            .brand {
-                padding: 0 5px 15px;
-            }
+            .layout { display: block; }
+            .sidebar { width: 100%; padding: 17px; }
+            .brand { padding: 0 5px 15px; }
 
             .sidebar nav {
                 display: flex;
@@ -421,46 +348,16 @@
                 font-size: 12px;
             }
 
-            .nav-icon {
-                display: none;
-            }
-
-            .logout {
-                margin-top: 10px;
-                padding-top: 10px;
-            }
-
-            .topbar {
-                padding: 15px 18px;
-            }
-
-            .content {
-                padding: 18px;
-            }
-
-            .hero {
-                padding: 24px;
-            }
-
-            .hero-art {
-                display: none;
-            }
-
-            .status-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .actions {
-                grid-template-columns: 1fr;
-            }
-
-            .card {
-                min-height: 190px;
-            }
-
-            footer {
-                padding: 20px;
-            }
+            .nav-icon { display: none; }
+            .logout { margin-top: 10px; padding-top: 10px; }
+            .topbar { padding: 15px 18px; }
+            .content { padding: 18px; }
+            .hero { padding: 24px; }
+            .hero-art { display: none; }
+            .status-grid { grid-template-columns: 1fr; }
+            .actions { grid-template-columns: 1fr; }
+            .card { min-height: 190px; }
+            footer { padding: 20px; }
         }
     </style>
 </head>
@@ -468,12 +365,10 @@
 <body>
 <div class="layout">
 
-    <!-- Sidebar -->
     <aside class="sidebar">
         <div class="brand">🔐 Trust<span>Vault</span></div>
 
         <nav aria-label="Main navigation">
-
             <a class="nav-link active" href="{{ url_for('dashboard') }}">
                 <span class="nav-icon">⌂</span>
                 Dashboard
@@ -494,19 +389,22 @@
                 File Integrity
             </a>
 
-            <!-- NEW: AI Assistant sidebar link -->
             <a class="nav-link" href="{{ url_for('ai_assistant') }}">
                 <span class="nav-icon">✦</span>
                 AI Assistant
             </a>
 
             {% if session.get('role') == 'admin' %}
+            <a class="nav-link" href="{{ url_for('admin_users') }}">
+                <span class="nav-icon">👥</span>
+                Registered Users
+            </a>
+
             <a class="nav-link" href="{{ url_for('audit_logs') }}">
                 <span class="nav-icon">▦</span>
                 Audit Logs
             </a>
             {% endif %}
-
         </nav>
 
         <div class="logout">
@@ -517,9 +415,7 @@
         </div>
     </aside>
 
-    <!-- Main area -->
     <div class="main">
-
         <header class="topbar">
             <div>
                 <strong>Workspace</strong><br>
@@ -539,12 +435,9 @@
         </header>
 
         <main class="content">
-
-            <!-- Welcome section -->
             <section class="hero">
                 <div>
                     <div class="eyebrow">Secure document management</div>
-
                     <h1>Welcome to <span>TrustVault</span></h1>
 
                     <p>
@@ -554,7 +447,6 @@
                     </p>
 
                     <div class="status-grid">
-
                         <div class="status-item">
                             <div class="status-icon">📄</div>
                             <div>
@@ -586,21 +478,18 @@
                                 <small>Audit records</small>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div class="hero-art" aria-hidden="true">🛡️</div>
             </section>
 
-            <!-- Quick Actions -->
             <section class="section-heading">
                 <h2>Quick Actions</h2>
                 <p>Choose an option to get started.</p>
             </section>
 
             <section class="actions">
-
                 <a class="card blue" href="{{ url_for('documents') }}">
                     <div class="card-icon">📁</div>
                     <h3>My Documents</h3>
@@ -631,7 +520,6 @@
                     <span class="arrow">Check Integrity →</span>
                 </a>
 
-                <!-- NEW: AI Assistant quick-action card -->
                 <a class="card purple" href="{{ url_for('ai_assistant') }}">
                     <div class="card-icon">🤖</div>
                     <h3>AI Assistant</h3>
@@ -643,6 +531,15 @@
                 </a>
 
                 {% if session.get('role') == 'admin' %}
+                <a class="card blue" href="{{ url_for('admin_users') }}">
+                    <div class="card-icon">👥</div>
+                    <h3>Registered Users</h3>
+                    <p>
+                        View registered accounts, roles, and registration dates.
+                    </p>
+                    <span class="arrow">View Registered Users →</span>
+                </a>
+
                 <a class="card purple" href="{{ url_for('audit_logs') }}">
                     <div class="card-icon">📋</div>
                     <h3>Audit Logs</h3>
@@ -653,13 +550,10 @@
                     <span class="arrow">View Audit Logs →</span>
                 </a>
                 {% endif %}
-
             </section>
 
-            <!-- Information notice -->
             <section class="notice">
                 <div class="notice-icon">ℹ️</div>
-
                 <div>
                     <h3>AI Usage Disclosure</h3>
                     <p>
@@ -670,7 +564,6 @@
                     </p>
                 </div>
             </section>
-
         </main>
 
         <footer>
@@ -678,7 +571,6 @@
             <span>Secure Document Sharing · Development Preview</span>
             <span>Built with Flask &amp; Python</span>
         </footer>
-
     </div>
 </div>
 </body>

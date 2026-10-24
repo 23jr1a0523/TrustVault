@@ -1,4 +1,3 @@
-
 from flask import (
     Flask,
     render_template,
@@ -27,7 +26,6 @@ load_dotenv(BASE_DIR / ".env")
 
 app = Flask(__name__)
 
-# Set SECRET_KEY in your .env file before production use.
 app.secret_key = os.environ.get(
     "SECRET_KEY",
     "dev-only-change-this-key"
@@ -76,8 +74,10 @@ def register():
 
         if len(username) < 3:
             error = "Username must have at least 3 characters."
+
         elif len(password) < 8:
             error = "Password must have at least 8 characters."
+
         else:
             connection = get_db_connection()
 
@@ -143,7 +143,7 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-# ---------------- ACCESS CONTROL PAGE ----------------
+# ---------------- ACCESS CONTROL ----------------
 
 @app.route("/access-control")
 @login_required
@@ -151,7 +151,7 @@ def access_control():
     return render_template("access_control.html")
 
 
-# ---------------- FILE INTEGRITY PAGE ----------------
+# ---------------- FILE INTEGRITY ----------------
 
 @app.route("/file-integrity")
 @login_required
@@ -159,7 +159,7 @@ def file_integrity():
     return render_template("file_integrity.html")
 
 
-# ---------------- AI ASSISTANT PAGE ----------------
+# ---------------- AI ASSISTANT ----------------
 
 @app.route("/ai-assistant")
 @login_required
@@ -176,16 +176,12 @@ def ai_chat():
     message = data.get("message", "")
 
     if not isinstance(message, str):
-        return jsonify({
-            "error": "Invalid message format."
-        }), 400
+        return jsonify({"error": "Invalid message format."}), 400
 
     message = message.strip()
 
     if not message:
-        return jsonify({
-            "error": "Please enter a message."
-        }), 400
+        return jsonify({"error": "Please enter a message."}), 400
 
     if len(message) > 1000:
         return jsonify({
@@ -220,9 +216,7 @@ def ai_chat():
 
         if not answer:
             return jsonify({
-                "error": (
-                    "The AI returned an empty response. Please try again."
-                )
+                "error": "The AI returned an empty response. Please try again."
             }), 502
 
         return jsonify({"answer": answer})
@@ -230,7 +224,6 @@ def ai_chat():
     except Exception as e:
         app.logger.exception("Gemini API request failed")
 
-        # Diagnostic message for development.
         return jsonify({
             "error": (
                 f"Gemini error: {type(e).__name__}: {str(e)[:300]}"
@@ -408,7 +401,6 @@ def download_document(document_id):
                 document["original_name"],
             ),
         )
-
         connection.commit()
     finally:
         connection.close()
@@ -449,8 +441,31 @@ def logout():
     return redirect(url_for("home"))
 
 
+# ---------------- ADMIN USERS ----------------
+
+@app.route("/admin/users")
+@login_required
+def admin_users():
+    if session.get("role") != "admin":
+        return "Access denied: Admins only.", 403
+
+    connection = get_db_connection()
+
+    try:
+        users = connection.execute(
+            """
+            SELECT id, username, role, created_at
+            FROM users
+            ORDER BY id DESC
+            """
+        ).fetchall()
+    finally:
+        connection.close()
+
+    return render_template("admin_users.html", users=users)
+
+
 # ---------------- RUN APPLICATION ----------------
 
 if __name__ == "__main__":
-    # Debug is convenient locally; disable it for production.
     app.run(debug=True)

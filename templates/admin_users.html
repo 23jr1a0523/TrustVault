@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Users | TrustVault</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        h1 { color: #38bdf8; }
+        .card {
+            background: #1e293b;
+            padding: 22px;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #334155;
+            text-align: left;
+        }
+        th { color: #38bdf8; }
+        .role {
+            background: #334155;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #38bdf8;
+            text-decoration: none;
+        }
+        .empty {
+            text-align: center;
+            padding: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TrustVault — Registered Users</h1>
+        <p>Admin panel: view registered accounts and roles.</p>
+
+        <div class="card">
+            <h2>Total Users: {{ users|length }}</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Registered At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user["id"] }}</td>
+                        <td>{{ user["username"] }}</td>
+                        <td><span class="role">{{ user["role"] }}</span></td>
+                        <td>{{ user["created_at"] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="empty">No registered users found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/dashboard">← Back to Dashboard</a>
+    </div>
+</body>
+</html>
