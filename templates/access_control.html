@@ -5,72 +5,643 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Access Control | TrustVault</title>
+
     <style>
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6fb;
-            color: #202943;
+        :root {
+            --purple: #7651e8;
+            --purple-dark: #6340d2;
+            --purple-light: #f0ebff;
+            --text: #28263a;
+            --muted: #858195;
+            --border: #eae8f0;
+            --background: #fbfaff;
+            --white: #ffffff;
         }
-        nav {
-            background: white;
-            padding: 18px 7%;
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont,
+                         "Segoe UI", Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navigation */
+
+        .navbar {
+            height: 68px;
+            padding: 0 6%;
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid #e4e8f0;
+            align-items: center;
+            gap: 16px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
         }
-        nav a { color: #6254d9; text-decoration: none; font-weight: bold; }
-        main { max-width: 850px; margin: 40px auto; padding: 20px; }
-        .panel {
-            background: white;
-            padding: 28px;
-            margin: 18px 0;
-            border: 1px solid #e4e8f0;
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            font-size: 21px;
+            font-weight: 750;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
             border-radius: 12px;
+            color: white;
+            background: linear-gradient(140deg, #9a7cff, #6843dc);
+            box-shadow: 0 3px 10px #7651e820;
+            font-size: 19px;
         }
-        h1 { color: #6254d9; }
-        p { line-height: 1.7; color: #68738a; }
-        .tag {
-            display: inline-block;
-            padding: 7px 12px;
-            border-radius: 20px;
-            background: #eeecff;
-            color: #6254d9;
+
+        .brand-name span {
+            color: var(--purple);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-caption {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 14px;
+            border: 1px solid #e5ddfa;
+            border-radius: 10px;
+            color: var(--purple);
+            background: #fcfaff;
             font-size: 13px;
+            font-weight: 650;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            background: var(--purple-light);
+        }
+
+        /* Main content */
+
+        main {
+            max-width: 1100px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 42px 0 50px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e7dfff;
+            border-radius: 30px;
+            background: var(--purple-light);
+            color: var(--purple);
+            font-size: 11px;
+            font-weight: 750;
+            letter-spacing: 0.4px;
+        }
+
+        .page-heading h1 {
+            margin-bottom: 11px;
+            font-size: clamp(28px, 4vw, 36px);
+            letter-spacing: -1px;
+        }
+
+        .page-heading p {
+            max-width: 680px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Summary strip */
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            margin: 29px 0 35px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: white;
+        }
+
+        .summary-icon {
+            width: 43px;
+            height: 43px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--purple-light);
+            font-size: 20px;
+        }
+
+        .summary-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .summary-item span {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* Section heading */
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 17px;
+        }
+
+        .section-heading h2 {
+            font-size: 19px;
+            margin-bottom: 6px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .section-label {
+            color: #89849b;
+            font-size: 11px;
+        }
+
+        /* Permission cards */
+
+        .permission-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .permission-card {
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 5px 20px #35235c06;
+            transition: 0.2s;
+        }
+
+        .permission-card:hover {
+            border-color: #d9cef8;
+            box-shadow: 0 8px 25px #35235c0a;
+            transform: translateY(-2px);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 19px;
+        }
+
+        .card-icon {
+            width: 49px;
+            height: 49px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: var(--purple-light);
+            font-size: 23px;
+        }
+
+        .role-tag {
+            padding: 7px 10px;
+            border-radius: 20px;
+            background: #f1edff;
+            color: #6c4bd4;
+            font-size: 10px;
+            font-weight: 750;
+            letter-spacing: 0.5px;
+        }
+
+        .role-tag.admin {
+            color: #236b9b;
+            background: #eaf5ff;
+        }
+
+        .permission-card h3 {
+            margin-bottom: 9px;
+            font-size: 17px;
+        }
+
+        .permission-card > p {
+            min-height: 65px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .card-divider {
+            height: 1px;
+            margin: 19px 0 16px;
+            background: #efedf4;
+        }
+
+        .capability-title {
+            color: #8a869a;
+            font-size: 10px;
+            font-weight: 750;
+            letter-spacing: 0.7px;
+            margin-bottom: 12px;
+        }
+
+        .capability {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin: 10px 0;
+            color: #575469;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .check {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #e9f8ef;
+            color: #238653;
+            font-size: 11px;
             font-weight: bold;
+        }
+
+        /* Security information */
+
+        .security-panel {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 22px;
+            margin-top: 23px;
+            border: 1px solid #e6defc;
+            border-radius: 15px;
+            background: linear-gradient(110deg, #f6f2ff, #fcfaff);
+        }
+
+        .security-icon {
+            width: 43px;
+            height: 43px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: white;
+            border: 1px solid #e8e0ff;
+            font-size: 21px;
+        }
+
+        .security-panel h3 {
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .security-panel p {
+            color: #716c84;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* Footer action */
+
+        .bottom-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
+        }
+
+        .bottom-action p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .documents-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            flex-shrink: 0;
+            padding: 12px 17px;
+            border-radius: 10px;
+            background: var(--purple);
+            color: white;
+            font-size: 12px;
+            font-weight: 650;
+            transition: 0.2s;
+        }
+
+        .documents-button:hover {
+            background: var(--purple-dark);
+            transform: translateY(-1px);
+        }
+
+        .footer {
+            padding-top: 24px;
+            text-align: center;
+            color: #a09bad;
+            font-size: 10px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 760px) {
+            .navbar {
+                height: 61px;
+                padding: 0 4%;
+            }
+
+            .brand {
+                font-size: 18px;
+            }
+
+            .brand-icon {
+                width: 34px;
+                height: 34px;
+            }
+
+            .nav-caption {
+                display: none;
+            }
+
+            main {
+                width: 91%;
+                padding: 29px 0 35px;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin: 22px 0 29px;
+            }
+
+            .summary-item {
+                padding: 14px;
+            }
+
+            .permission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .permission-card {
+                padding: 20px;
+            }
+
+            .permission-card > p {
+                min-height: 0;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .back-link {
+                padding: 9px 10px;
+                font-size: 11px;
+            }
+
+            .page-heading h1 {
+                font-size: 28px;
+            }
+
+            .bottom-action {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .documents-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .security-panel {
+                padding: 16px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <nav>
-        <strong>TrustVault</strong>
-        <a href="{{ url_for('dashboard') }}">← Dashboard</a>
+
+    <nav class="navbar">
+        <a href="{{ url_for('dashboard') }}" class="brand">
+            <span class="brand-icon">🔐</span>
+            <span class="brand-name">Trust<span>Vault</span></span>
+        </a>
+
+        <div class="nav-right">
+            <span class="nav-caption">Secure Document Platform</span>
+            <a href="{{ url_for('dashboard') }}" class="back-link">
+                ← Dashboard
+            </a>
+        </div>
     </nav>
 
     <main>
-        <h1>Access Control</h1>
-        <p>TrustVault restricts document access to protect confidential files.</p>
 
-        <section class="panel">
-            <span class="tag">USER ROLE</span>
-            <h2>Document Owner</h2>
-            <p>Users can view and download only documents associated with their account. The server checks ownership before allowing a download.</p>
+        <section class="page-heading">
+            <div class="eyebrow">🛡️ SECURITY & PERMISSIONS</div>
+            <h1>Access Control</h1>
+            <p>
+                Understand how TrustVault protects your documents through
+                ownership checks, administrator permissions, and server-side
+                authorization.
+            </p>
         </section>
 
-        <section class="panel">
-            <span class="tag">ADMIN ROLE</span>
-            <h2>Administrator</h2>
-            <p>Administrators can view the audit logs page. Ordinary users are denied access to that page.</p>
+        <section class="summary">
+
+            <div class="summary-item">
+                <div class="summary-icon">👤</div>
+                <div>
+                    <strong>Document Ownership</strong>
+                    <span>Access to associated documents</span>
+                </div>
+            </div>
+
+            <div class="summary-item">
+                <div class="summary-icon">🛡️</div>
+                <div>
+                    <strong>Role-Based Access</strong>
+                    <span>Permissions depend on user role</span>
+                </div>
+            </div>
+
+            <div class="summary-item">
+                <div class="summary-icon">🔒</div>
+                <div>
+                    <strong>Server-Side Checks</strong>
+                    <span>Authorization enforced on the server</span>
+                </div>
+            </div>
+
         </section>
 
-        <section class="panel">
-            <span class="tag">SECURITY</span>
-            <h2>Server-side authorization</h2>
-            <p>Access checks happen on the server, rather than relying only on hiding links in the website.</p>
+        <section>
+            <div class="section-heading">
+                <div>
+                    <h2>Roles & Permissions</h2>
+                    <p>How different roles access TrustVault resources.</p>
+                </div>
+                <span class="section-label">ACCESS POLICY</span>
+            </div>
+
+            <div class="permission-grid">
+
+                <article class="permission-card">
+                    <div class="card-top">
+                        <div class="card-icon">👤</div>
+                        <span class="role-tag">USER ROLE</span>
+                    </div>
+
+                    <h3>Document Owner</h3>
+
+                    <p>
+                        Users can view and download only documents associated
+                        with their account. The server checks ownership before
+                        allowing a download.
+                    </p>
+
+                    <div class="card-divider"></div>
+
+                    <div class="capability-title">PERMISSIONS & PROTECTION</div>
+
+                    <div class="capability">
+                        <span class="check">✓</span>
+                        <span>View documents associated with their account</span>
+                    </div>
+
+                    <div class="capability">
+                        <span class="check">✓</span>
+                        <span>Download their own documents</span>
+                    </div>
+
+                    <div class="capability">
+                        <span class="check">✓</span>
+                        <span>Ownership is checked by the server</span>
+                    </div>
+                </article>
+
+                <article class="permission-card">
+                    <div class="card-top">
+                        <div class="card-icon">🛡️</div>
+                        <span class="role-tag admin">ADMIN ROLE</span>
+                    </div>
+
+                    <h3>Administrator</h3>
+
+                    <p>
+                        Administrators can access the audit logs page.
+                        Ordinary users are denied access to that page.
+                    </p>
+
+                    <div class="card-divider"></div>
+
+                    <div class="capability-title">ADMINISTRATIVE ACCESS</div>
+
+                    <div class="capability">
+                        <span class="check">✓</span>
+                        <span>Access the audit logs page</span>
+                    </div>
+
+                    <div class="capability">
+                        <span class="check">✓</span>
+                        <span>Review recorded activity in audit logs</span>
+                    </div>
+
+                    <div class="capability">
+                        <span class="check">✓</span>
+                        <span>Administrator access is checked by the server</span>
+                    </div>
+                </article>
+
+            </div>
         </section>
 
-        <a href="{{ url_for('documents') }}">Go to My Documents →</a>
+        <section class="security-panel">
+            <div class="security-icon">🔐</div>
+            <div>
+                <h3>Server-Side Authorization</h3>
+                <p>
+                    Access checks happen on the server, not just by hiding
+                    links in the website. This helps prevent users from
+                    accessing restricted pages or downloading documents
+                    they do not own.
+                </p>
+            </div>
+        </section>
+
+        <section class="bottom-action">
+            <p>
+                Manage your files from one place.<br>
+                View the documents associated with your account.
+            </p>
+
+            <a href="{{ url_for('documents') }}" class="documents-button">
+                📁 Go to My Documents <span>→</span>
+            </a>
+        </section>
+
+        <div class="footer">
+            © TrustVault · Secure Document Sharing & Management
+        </div>
+
     </main>
+
 </body>
 </html>
